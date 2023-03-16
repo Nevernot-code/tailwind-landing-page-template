@@ -23,7 +23,7 @@ function Header() {
           <div className="flex-shrink-0 mr-4">
             {/* Logo */}
             <Link to="/" className="block" aria-label="#GPT4">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 text-xl font-bold">HASHED#</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 text-xl font-bold">TRACKPRO</span>
             </Link>
           </div>
 
