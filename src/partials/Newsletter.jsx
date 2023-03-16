@@ -1,6 +1,34 @@
 import React from 'react';
 
 function Newsletter() {
+  const [email, setEmail] = React.useState('');
+
+  function submitEmailAddress() {
+    // https://eoik253kqwmz2o8.m.pipedream.net
+    if (email) {
+      let formData = {
+        "email": email,
+        "website": 'trackpro'
+      }
+
+      fetch('https://eoik253kqwmz2o8.m.pipedream.net', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      })
+        .then(response => {
+          alert('เราได้รับคำขอของท่านแล้ว')
+        })
+        .catch(error => {
+          alert('ไม่สำเร็จ')
+          // console.error(error);
+          // handle error
+        });
+    } else {
+      alert("email ไม่ถูกต้อง")
+    }
+
+  }
+
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -45,12 +73,18 @@ function Newsletter() {
                 {/* CTA form */}
                 <form className="w-full lg:w-auto">
                   <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
-                    <input type="email" className="form-input w-full appearance-none bg-gray-800 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" placeholder="Your email…" aria-label="Your email…" />
-                    <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" href="#0">ตกลง</a>
+                    <input type="email" className="form-input w-full appearance-none bg-gray-800 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500"
+                      placeholder="Your email…" aria-label="Your email…"
+                      value={email}
+                      onChange={event => {
+                        setEmail(event.target.value);
+                      }}
+                    />
+                    <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" style={{ cursor: 'pointer' }} onClick={submitEmailAddress}>ตกลง</a>
                   </div>
                   {/* Success message */}
                   {/* <p className="text-sm text-gray-400 mt-3">Thanks for subscribing!</p> */}
-                  <p className="text-sm text-gray-400 mt-3">ทดลองใช้ฟรี. ไม่มีค่าใช้จ่ายใดๆสำหรับการรับ Access Key.</p>
+                  <button className="text-sm text-gray-400 mt-3">ทดลองใช้ฟรี. ไม่มีค่าใช้จ่ายใดๆสำหรับการรับ Access Key.</button>
                 </form>
               </div>
 

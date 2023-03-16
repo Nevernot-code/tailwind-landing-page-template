@@ -5,6 +5,33 @@ import Header from '../partials/Header';
 import Banner from '../partials/Banner';
 
 function SignUp() {
+  const [email, setEmail] = React.useState('');
+
+  function submitEmailAddress() {
+    // https://eoik253kqwmz2o8.m.pipedream.net
+    if (email) {
+      let formData = {
+        "email": email,
+        "website": 'trackpro'
+      }
+
+      fetch('https://eoik253kqwmz2o8.m.pipedream.net', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      })
+        .then(response => {
+          alert('เราได้รับคำขอของท่านแล้ว')
+        })
+        .catch(error => {
+          console.error(error);
+          alert('เราได้รับคำขอของท่านแล้ว')
+          // handle error
+        });
+    } else {
+      alert("email ไม่ถูกต้อง")
+    }
+
+  }
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -20,7 +47,7 @@ function SignUp() {
 
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                <h1 className="h1">ลงทะเบียนรับ <br/>Access Key</h1>
+                <h1 className="h1">ลงทะเบียนรับ <br />Access Key</h1>
               </div>
 
               {/* Form */}
@@ -35,7 +62,13 @@ function SignUp() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="your email address" required />
+                      <input id="email" type="email" className="form-input w-full text-gray-800"
+                        placeholder="your email address"
+                        value={email}
+                        onChange={event => {
+                          setEmail(event.target.value);
+                        }}
+                        required />
                     </div>
                   </div>
                   {/* <div className="flex flex-wrap -mx-3 mb-4">
@@ -46,7 +79,7 @@ function SignUp() {
                   </div> */}
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={submitEmailAddress}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
